@@ -1,0 +1,5 @@
+**/compile_commands.json
+exercises/1_basics/c/basics
+exercises/1_basics/c/list_compressors
+exercises/1_basics/c/get_compressor_options
+exercises/2_comparing_compressors/figures/*.png

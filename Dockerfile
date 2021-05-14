@@ -1,4 +1,4 @@
-# Build stage with Spack pre-installed and ready to be used
+#Build stage with Spack pre-installed and ready to be used
 FROM spack/centos7:latest as builder
 
 RUN git clone https://github.com/robertu94/spack_packages /opt/robertu94_spack
@@ -8,7 +8,7 @@ RUN git clone https://github.com/robertu94/spack_packages /opt/robertu94_spack
 RUN mkdir /opt/spack-environment \
 &&  (echo "spack:" \
 &&   echo "  specs:" \
-&&   echo "  - libpressio+hdf5+mgard+mpi+python+remote+sz+zfp target=x86_64 ^libstdcompat+boost" \
+&&   echo "  - libpressio+json+hdf5+mgard+mpi+python+remote+sz+zfp target=x86_64 ^libstdcompat+boost" \
 &&   echo "  view: /opt/view" \
 &&   echo "  repos:" \
 &&   echo "  - /opt/robertu94_spack" \
@@ -40,8 +40,12 @@ COPY --from=builder /opt/view /opt/view
 COPY --from=builder /etc/profile.d/z10_spack_environment.sh /etc/profile.d/z10_spack_environment.sh
 
 RUN yum update -y && yum install -y epel-release && yum update -y \
- && yum install -y libgomp libgfortran openssh-clients \
+ && yum install -y libgomp libgfortran openssh-clients pkgconfig gcc-c++ gcc make gdb \
  && rm -rf /var/cache/yum  && yum clean all
 
 
+RUN useradd tutorial
+COPY --chown=tutorial:tutorial ./exercises /exercises
+USER tutorial
+WORKDIR /exercises
 ENTRYPOINT ["/bin/bash", "--rcfile", "/etc/profile", "-l"]

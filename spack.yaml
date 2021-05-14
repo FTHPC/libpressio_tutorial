@@ -4,8 +4,11 @@
 # configuration settings.
 spack:
   # add package specs to the `specs` list
-  specs: [libpressio+hdf5+mgard+mpi+python+remote+sz+zfp target=x86_64 ^libstdcompat+boost]
+  specs:
+    - libpressio+hdf5+mgard+mpi+python+remote+sz+zfp target=x86_64 ^libstdcompat+boost
+    - py-matplotlib
   view: true
+  concretizer: together
   container:
     format: docker
     images:
@@ -16,5 +19,9 @@ spack:
         - libgomp
         - libgfortran
         - openssh-clients
+        - gcc-c++
+        - gcc
+        - make
+        - gdb
   repos:
   - /opt/robertu94_spack
