@@ -152,7 +152,7 @@ bound=1e-06, metrics={
 ... <snipped remaining output>
 ```
 
-### Exercises
+## Exercises
 
 1. Review the documentation for SZ.  Try repeating the experiment in `basic.py` or `basic.c` with SZ's Value Range relative mode. What happens to the error statistics?  (note, get_compressor_options.py may help you here)
 2. Review the documentation for ZFP.  Try repeating the experiment in `basic.py` or `basic.c` with ZFP's accuracy mode. What happens to the error statistics? (note, get_compressor_options.py may help you here)
