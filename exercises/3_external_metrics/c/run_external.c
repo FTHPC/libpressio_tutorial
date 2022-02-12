@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
   struct pressio_options* metrics_options = pressio_options_new();
   const char* metrics_ids[] = {"external"};
   size_t n_metrics_ids = sizeof(metrics_ids)/sizeof(metrics_ids[0]);
-  pressio_options_set_string(metrics_options, "sz:metric", "composite");
+  pressio_options_set_string(metrics_options, "pressio:metric", "composite");
   pressio_options_set_strings(metrics_options, "composite:plugins", n_metrics_ids, metrics_ids);
   pressio_options_set_string(metrics_options, "external:command", "./external_metric");
 
@@ -51,8 +51,7 @@ int main(int argc, char *argv[])
   for (size_t i = 0; i < n_bounds; ++i) {
     //configure the compressor error bound
     struct pressio_options* options = pressio_options_new();
-    pressio_options_set_string(options, "sz:error_bound_mode_str", "abs");
-    pressio_options_set_double(options, "sz:abs_err_bound", bounds[i]);
+    pressio_options_set_double(options, "pressio:abs", bounds[i]);
 
     //verify that options passed exist
     if(pressio_compressor_check_options(comp, options)) {

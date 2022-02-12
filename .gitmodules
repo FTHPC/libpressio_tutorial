@@ -1,0 +1,3 @@
+[submodule "spack_packages"]
+	path = robertu94_packages
+	url = https://github.com/robertu94/spack_packages

@@ -16,13 +16,12 @@ for bound in np.logspace(start=-6, stop=-1, num=6):
         "compressor_id": "sz",
         # configure the set of metrics to be gathered
         "early_config": {
-            "sz:metric": "composite",
+            "pressio:metric": "composite",
             "composite:plugins": ["time", "size", "error_stat"]
         },
         # configure SZ
         "compressor_config": {
-            "sz:abs_err_bound": bound,
-            "sz:error_bound_mode_str": "abs",
+            "pressio:abs": bound,
         }})
 
     # run compressor to determine metrics
