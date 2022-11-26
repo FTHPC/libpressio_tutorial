@@ -1,5 +1,5 @@
 DATADIR=$(realpath $(shell pwd)/../..)/datasets/
-LDFLAGS=-lm $(shell pkg-config --libs libpressio)
+LDLIBS=-lm $(shell pkg-config --libs libpressio)
 CFLAGS=-std=c99 -g -O2 $(shell pkg-config --cflags libpressio)
 CPPFLAGS=-DDATADIR="\"$(DATADIR)\""
 ALL=run_external external_metric

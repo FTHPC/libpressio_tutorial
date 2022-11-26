@@ -1,6 +1,6 @@
 DATADIR=$(realpath $(shell pwd)/../..)/datasets/
-LDFLAGS=$(shell pkg-config --libs libpressio libpressio_opt)
-CFLAGS=-std=c99 -g $(shell pkg-config --cflags libpressio libpressio_opt)
+LDLIBS=$(shell pkg-config --libs libpressio libpressio_meta)
+CFLAGS=-std=c99 -g $(shell pkg-config --cflags libpressio libpressio_meta)
 CPPFLAGS=-DDATADIR="\"$(DATADIR)\""
 ALL=opt_zfp_perf
 .PHONY: all clean

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <libpressio.h>
+#include <libpressio_meta.h>
 #include <libpressio_ext/io/posix.h>
 
 struct pressio_data* data_from_array(double* values, size_t n) {
@@ -8,11 +9,18 @@ struct pressio_data* data_from_array(double* values, size_t n) {
 
 int main(int argc, char *argv[])
 {
+  libpressio_register_all();
+
   //read in the dataset
   size_t dims[] = {100, 500, 500};
   size_t ndims = sizeof(dims)/sizeof(dims[0]);
   struct pressio_data* metadata = pressio_data_new_empty(pressio_float_dtype, ndims, dims);
   struct pressio_data* input_data = pressio_io_data_path_read(metadata, DATADIR "CLOUDf48.bin.f32");
+  if(input_data == NULL) {
+    fprintf(stderr, "failed to file input_data at \"" DATADIR "CLOUDf48.bin.f32\" make sure it is there\n" \
+        "you may need to install git-lfs to download the datasets\n");
+    exit(1);
+  }
 
   //create output locations
   struct pressio_data* compressed = pressio_data_new_empty(pressio_byte_dtype, 0, NULL);
@@ -21,6 +29,11 @@ int main(int argc, char *argv[])
   //get the compressor
   struct pressio* library = pressio_instance();
   struct pressio_compressor* comp = pressio_get_compressor(library, "opt");
+  if(comp == NULL) {
+    fprintf(stderr, "failed to load compressor: %s\n", pressio_error_msg(library));
+    fprintf(stderr, "checked to ensure that liblibpressio_opt.so was loaded into the binary using readelf -d ./opt_zfp_perf\n");
+    exit(1);
+  }
 
   //configure metrics for the compressor
   struct pressio_options* search_configuration = pressio_options_new();

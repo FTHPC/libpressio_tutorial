@@ -1,5 +1,5 @@
 CXXFLAGS=-g $(shell pkg-config --cflags libpressio_cxx)
-LDFLAGS=$(shell pkg-config --libs libpressio_cxx)
+LDLIBS=$(shell pkg-config --libs libpressio_cxx)
 ALL=test_runlength libpressio_runlength_base.so libpressio_runlength_solution.so test_pressio_base
 all:$(ALL)
 lib%.so:%.cc

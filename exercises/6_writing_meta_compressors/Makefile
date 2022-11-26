@@ -1,5 +1,5 @@
 CXXFLAGS=-g $(shell pkg-config --cflags libpressio_cxx)
-LDFLAGS=$(shell pkg-config --libs libpressio_cxx)
+LDLIBS=$(shell pkg-config --libs libpressio_cxx)
 ALL=libpressio_typeswitch_base.so libpressio_typeswitch_solution.so test_pressio_base
 all:$(ALL)
 lib%.so:%.cc
