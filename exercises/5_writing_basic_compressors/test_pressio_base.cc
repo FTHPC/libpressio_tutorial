@@ -77,7 +77,7 @@ int main(int argc, char *argv[])
 
   struct pressio_options* configuration = pressio_compressor_get_configuration(compressor);
   assert(configuration);
-  assert_type_is(configuration, "pressio:thread_safe", pressio_option_int32_type);
+  assert_type_is(configuration, "pressio:thread_safe", pressio_option_threadsafety_type);
   assert_type_is(configuration, "pressio:stability", pressio_option_charptr_type);
 
   struct pressio_options* documentation = pressio_compressor_get_documentation(compressor);

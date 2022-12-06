@@ -39,7 +39,7 @@ struct pressio_runlength : public libpressio_compressor_plugin {
   }
   pressio_options get_configuration_impl() const override {
     pressio_options opts;
-    set(opts, "pressio:thread_safe", static_cast<int32_t>(pressio_thread_safety_multiple));
+    set(opts, "pressio:thread_safe", pressio_thread_safety_multiple);
     set(opts, "pressio:stability", "experimental");
     return opts;
   }
