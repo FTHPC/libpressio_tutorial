@@ -1,0 +1,14 @@
+cmake_minimum_required(VERSION 3.18)
+project(exercise6)
+
+find_package(LibPressio REQUIRED)
+find_package(std_compat REQUIRED)
+
+add_library(pressio_typeswitch_base SHARED pressio_typeswitch_base.cc)
+target_link_libraries(pressio_typeswitch_base PUBLIC LibPressio::libpressio)
+
+add_library(pressio_typeswitch_solution SHARED pressio_typeswitch_solution.cc)
+target_link_libraries(pressio_typeswitch_solution PUBLIC LibPressio::libpressio)
+
+add_executable(test_pressio_base test_pressio_base.cc)
+target_link_libraries(test_pressio_base PUBLIC pressio_typeswitch_base)
