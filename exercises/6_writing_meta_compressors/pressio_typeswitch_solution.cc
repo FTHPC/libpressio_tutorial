@@ -19,11 +19,10 @@ struct pressio_typeswitch : public libpressio_compressor_plugin {
     pressio_options opts;
     opts.copy_from(integral->get_configuration());
     opts.copy_from(floating->get_configuration());
-    set(opts, "pressio:thread_safe", static_cast<int32_t>(
+    set(opts, "pressio:thread_safe", 
           std::min(
           pressio_configurable::get_threadsafe(*integral),
           pressio_configurable::get_threadsafe(*floating)
-          )
           ));
     set(opts, "pressio:stability", "experimental");
     return opts;
